@@ -14,6 +14,6 @@ Rails.application.routes.draw do
 
   get "/users/:id", to: "users#show_id"
 
-  get "/wordpuzzles", to: "wordpuzzles#index"
-  get "/rposts", to: "wordpuzzles#create"
+  get "/wordpuzzles", to: "worldpuzzles#index"
+  get "/rpost", to: "worldpuzzles#create"
 end
