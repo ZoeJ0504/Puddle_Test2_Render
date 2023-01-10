@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom"
 
 function LoginForm({ setUser, setIsVisible }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+const navigate = useNavigate()
+
 
   function handleClick(e) {
     setIsVisible(true)
@@ -11,6 +14,7 @@ function LoginForm({ setUser, setIsVisible }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     fetch("/login", {
       method: "POST",
       headers: {
@@ -25,6 +29,7 @@ function LoginForm({ setUser, setIsVisible }) {
         r.json().then((user) => setUser(user));
       }
     });
+    navigate("/home")
   }
   return (
     <div>
@@ -74,9 +79,9 @@ padding: 5px;
 width: 100px; 
 height: 30px;
 font-size: 15px;
-border-color: darkgreen;
+border-color: #008037;
 &:hover{
-  background-color: darkgreen;
+  background-color: #008037;
   color: white;
 } 
 `
@@ -86,9 +91,9 @@ width: 200px;
 height: 30px;
 padding: 5px;
 font-size: 15px;
-border-color: darkgreen;
+border-color: #008037;
 &:hover{
-  background-color: darkgreen;
+  background-color: #008037;
   color: white;
 } 
 

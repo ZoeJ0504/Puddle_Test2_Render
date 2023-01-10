@@ -1,6 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import logo from "../image/logo.png"
 
 function NavBar({ logout }) {
     const navigate = useNavigate()
@@ -36,13 +37,13 @@ function NavBar({ logout }) {
     return (
         <NavBarDiv>
             <div>
-                <img src="./src/image/Priddle.png" alt="Priddle Logo" />
+                <Logo src={logo} alt="Priddle Logo" />
             </div>
-            <div onClick={handleHomeClick}>Home</div>
-            <div onClick={handleRiddleClick}>Riddles</div>
-            <div onClick={handleSDClick}>Spot The Difference</div>
-            <div onClick={handle3DPuzzle}>3D Puzzle</div>
-            <button onClick={handleClick}>Logout</button>
+            <NavTab onClick={handleHomeClick}>Home</NavTab>
+            <NavTab onClick={handleRiddleClick}>Riddles</NavTab>
+            <NavTab onClick={handleSDClick}>Spot The Difference</NavTab>
+            <NavTab onClick={handle3DPuzzle}>3D Puzzle</NavTab>
+            <NavButton onClick={handleClick}>Logout</NavButton>
         </NavBarDiv>
     )
 }
@@ -55,4 +56,29 @@ flex-direction: row;
 justify-content: space-around;
 `
 
+const Logo = styled.img`
+width: 200px;
+height: auto;
+`
+
+const NavTab = styled.div`
+font-size: 30px;
+padding: 30px;
+color: #008037;
+&:hover{
+    color: white;
+    cursor: pointer;
+}
+`
+
+const NavButton = styled.button`
+width: 75px;
+height: 30px;
+margin: 30px;
+border-color: #008037;
+&:hover{
+  background-color: #008037;
+  color: white;
+} 
+`
 

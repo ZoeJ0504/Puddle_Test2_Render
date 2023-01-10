@@ -1,8 +1,7 @@
 class WorldpuzzlesController < ApplicationController
 
     def index
-        w = Worldpuzzle.all
-        render json: w
+        render json: Worldpuzzle.all
     end
 
     def create  
@@ -16,7 +15,11 @@ class WorldpuzzlesController < ApplicationController
         render json: p
     end
 
-
+def destroy 
+ w = Worldpuzzle.find(params[:id])
+  riddle = w.destroy
+  render json: riddle
+end
 
     def worldpuzzle_params
         params.permit(:post, :user_id)

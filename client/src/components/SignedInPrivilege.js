@@ -32,7 +32,7 @@ function SignedInPrivilege({ currentPost }) {
     }
 
     const handleDelete = () => {
-        fetch(`/posts/${currentPost}`, {
+        fetch(`/worldpuzzleremove/${currentPost}`, {
             method: "DELETE"
         })
             .then(res => res.json())

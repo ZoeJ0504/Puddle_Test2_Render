@@ -6,11 +6,17 @@ function Home2() {
 
     return (
 <div>
-<h1>Welcome to Priddle!</h1>
+<HeadingTitle>Welcome to Priddle!</HeadingTitle>
 <p>Social site to share puzzles and riddles!</p>
+<p>There are three different categories you can post in: Riddles, Spot the Difference, 3D Puzzles.</p>
+<p></p>
 </div>
     )
 }
 
 export default Home2;
 
+const HeadingTitle = styled.h1`
+font-size: 50px;
+
+`

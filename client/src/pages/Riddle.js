@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import PostDisplays from '../components/PostDisplay'
 import RiddlePostForm from '../components/RiddlePostForm'
+import styled from 'styled-components'
 
 function Riddle({ user }) {
     const [comments, setComments] = useState([])
     const [newPost, setNewPost] = useState({})
     const [riddle, setRiddle] = useState("")
+    const [show, setShow] = useState(false)
 
 
 
     useEffect(() => {
-        fetch("/wordpuzzles")
+        fetch("/wordpuzzle")
             .then(r => r.json())
             .then(data => {
-                console.log(data)
-                // setComments(data.posts)
+                setComments(data)
             })
     }, [])
 
@@ -29,7 +30,6 @@ function Riddle({ user }) {
         handleSubmit()
     }
 
-    console.log(newPost)
 
     const handleSubmit = () => {
         fetch("/rpost", {
@@ -48,10 +48,17 @@ function Riddle({ user }) {
         setRiddle(e.target.value)
     }
 
+const changeShow = () => setShow(!show)
     return (
         <div>
-            <RiddlePostForm handleHandler={handleHandler} handleChange={handleChange} riddle={riddle} />
+            <p>This is the Riddles Page!</p>
+            <button onClick={changeShow}>Have a Riddle?</button>
+            { show === true? 
+            <RiddlePostForm handleHandler={handleHandler} handleChange={handleChange} riddle={riddle} /> 
+            : <p></p>
+            }
             {comments?.map(comment => { return <PostDisplays key={comment.id} text={comment.post} id={comment.user_id} user={user} postId={comment.id} /> })}
+            
         </div>
     )
 }

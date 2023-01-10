@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :wordpuzzles, only: [:index, :update, :create, :destroy]
+  resources :wordpuzzles
   resources :users
   resources :sessions, only: [:create, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   get "/users/:id", to: "users#show_id"
 
-  get "/wordpuzzles", to: "worldpuzzles#index"
-  get "/rpost", to: "worldpuzzles#create"
+  get "/wordpuzzle", to: "worldpuzzles#index"
+  post "/rpost", to: "worldpuzzles#create"
+  delete "/worldpuzzleremove/:id", to: "worldpuzzles#destroy"
+  
 end

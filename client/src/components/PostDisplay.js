@@ -2,19 +2,19 @@ import React, { useEffect, useState } from "react";
 import SignedInPrivilege from "./SignedInPrivilege";
 
 function PostDisplays({ text, id, user, postId }) {
-    const [maybe, setMaybe] = useState([])
+    const [username, setUsername] = useState([])
 
     useEffect(() => {
         fetch(`/users/${id}`)
             .then(res => res.json())
-            .then(data => setMaybe(data.username))
+            .then(data => setUsername(data.username))
     }, [id])
 
     return (
         <div>
             <p>{text}</p>
-            <p>-{maybe}</p>
-            {user && (user?.username === maybe ? <SignedInPrivilege currentPost={postId} /> : <p>Enjoy the Post!</p>)}
+            <p>-{username}</p>
+            {user && (user?.username === username ? <SignedInPrivilege currentPost={postId} /> : <p>Enjoy the Post!</p>)}
         </div>
     )
 }
