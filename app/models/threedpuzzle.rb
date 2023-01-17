@@ -1,0 +1,2 @@
+class Threedpuzzle < ApplicationRecord
+end

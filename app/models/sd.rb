@@ -1,0 +1,2 @@
+class Sd < ApplicationRecord
+end

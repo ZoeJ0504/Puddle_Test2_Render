@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
+import logo from "../image/logo.png"
 
 function LoginForm({ setUser, setIsVisible }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-const navigate = useNavigate()
+  const navigate = useNavigate()
 
 
   function handleClick(e) {
@@ -33,6 +34,7 @@ const navigate = useNavigate()
   }
   return (
     <div>
+      <Logo src={logo} alt="Priddle Logo" />
       <TitleP>Login</TitleP>
       <form onSubmit={handleSubmit}>
         <p></p>
@@ -41,6 +43,7 @@ const navigate = useNavigate()
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
+          required
         />
         <p></p>
         <FormInput
@@ -48,6 +51,7 @@ const navigate = useNavigate()
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
+          required
         />
         <p></p>
         <LoginButton type="submit">Login</LoginButton>
@@ -66,7 +70,7 @@ font-size: 20px;
 text-align: center;
 width: 150px; 
 height: 30px; 
-border-color: darkgreen;
+border-color: #008037;
 border-size: 5px;
 `
 
@@ -96,5 +100,9 @@ border-color: #008037;
   background-color: #008037;
   color: white;
 } 
+`
 
+const Logo = styled.img` 
+width: 400px;
+height: auto;
 `

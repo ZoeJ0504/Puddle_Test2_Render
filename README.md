@@ -1,24 +1,50 @@
-# README
+# Priddle
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<p align="center">
+  <img src="./client/src/image/logo.png"/>
+</p>
 
-Things you may want to cover:
+Social Site that allows users to comment and post puzzles and riddles. 
 
-* Ruby version
+### A live version of Priddle is deployed with Render and running here:
 
-* System dependencies
+[Live Version](https://priddle.onrender.com/)
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+## Features
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Posting
 
-* Deployment instructions
 
-* ...
+
+
+
+## Get started
+After cloning the repo into you system you will need to: 
+- make sure your system is running a ruby version 
+
+After cloning the repo, run the following steps in the project directory to get started:
+
+```
+bundle install
+```
+Install Ruby gem packages associated with the project.
+
+ ```
+ rails db:migrate db:seed
+ ```
+Migrates all tables and associations that are needed. Also make sure to seed the backend so you have some data to work with.
+
+ ```
+ rails s
+ ```
+Start your Rails server. For a closer look at just the backend, you can open http://localhost:3000
+
+Finally for your front end run:
+
+```
+npm start --prefix client
+```
+Runs the app in the development mode. 

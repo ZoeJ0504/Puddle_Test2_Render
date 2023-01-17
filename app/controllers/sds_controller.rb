@@ -1,0 +1,2 @@
+class SdsController < ApplicationController
+end

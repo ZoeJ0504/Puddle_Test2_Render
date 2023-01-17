@@ -15,10 +15,12 @@ function Riddle({ user }) {
         fetch("/wordpuzzle")
             .then(r => r.json())
             .then(data => {
-                setComments(data)
+                console.log(data)
+                // setComments(data)
             })
     }, [])
 
+    
 
 
     const handleHandler = (e) => {
@@ -30,7 +32,7 @@ function Riddle({ user }) {
         handleSubmit()
     }
 
-
+    console.log(newPost)
     const handleSubmit = () => {
         fetch("/rpost", {
             method: 'POST',
@@ -47,20 +49,36 @@ function Riddle({ user }) {
     const handleChange = (e) => {
         setRiddle(e.target.value)
     }
-
-const changeShow = () => setShow(!show)
+    console.log(riddle)
+    const changeShow = () => setShow(!show)
     return (
         <div>
-            <p>This is the Riddles Page!</p>
-            <button onClick={changeShow}>Have a Riddle?</button>
-            { show === true? 
-            <RiddlePostForm handleHandler={handleHandler} handleChange={handleChange} riddle={riddle} /> 
-            : <p></p>
+            <PageTitle>Riddles!</PageTitle>
+            <ShowButton onClick={changeShow}>Have a Riddle?</ShowButton>
+            {show === true ?
+                <RiddlePostForm handleHandler={handleHandler} handleChange={handleChange} riddle={riddle} />
+                : <p></p>
             }
             {comments?.map(comment => { return <PostDisplays key={comment.id} text={comment.post} id={comment.user_id} user={user} postId={comment.id} /> })}
-            
+
         </div>
     )
 }
 
-export default Riddle
+export default Riddle;
+
+const PageTitle = styled.p`
+font-size: 40px;
+text-decoration: underline;
+`
+const ShowButton = styled.button`
+width: 150px;
+height: 30px;
+padding: 5px;
+font-size: 15px;
+border-color: #008037;
+&:hover{
+  background-color: #008037;
+  color: white;
+} 
+`

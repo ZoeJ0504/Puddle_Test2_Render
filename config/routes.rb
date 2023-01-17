@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :posts
+  resources :threedpuzzles
+  resources :sds
   resources :wordpuzzles
   resources :users
   resources :sessions, only: [:create, :destroy]
