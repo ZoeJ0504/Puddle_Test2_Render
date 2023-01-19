@@ -21,5 +21,6 @@ Rails.application.routes.draw do
   get "/wordpuzzle", to: "worldpuzzles#index"
   post "/rpost", to: "worldpuzzles#create"
   delete "/worldpuzzleremove/:id", to: "worldpuzzles#destroy"
+  patch "/worldpuzzleupdate/:id", to: "worldpuzzles#update" 
   
 end

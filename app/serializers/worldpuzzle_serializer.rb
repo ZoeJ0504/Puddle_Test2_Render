@@ -1,6 +1,8 @@
 class WorldpuzzleSerializer < ActiveModel::Serializer
-  attributes :id, :post, :user_id 
+  attributes :id, :post, :user_id
 
-  has_many :users
-  
+  belongs_to :user
+
+
+
 end

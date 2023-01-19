@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-function SignedInPrivilege({ currentPost }) {
+function SignedInPrivilege({ handleDelete, postId, setComments }) {
     const [updatePost, setUpdatePost] = useState(false)
     const [updatedText, setUpdatedText] = useState("")
+
 
 
     const handleClick = () => {
@@ -10,7 +11,6 @@ function SignedInPrivilege({ currentPost }) {
     }
 
     const handleChange = (event) => {
-        console.log(updatedText)
         setUpdatedText(event.target.value)
     }
 
@@ -18,31 +18,30 @@ function SignedInPrivilege({ currentPost }) {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        fetch(`/posts/${currentPost}`, {
+        fetch(`/worldpuzzleupdate/${postId}`, {
             method: "PATCH",
             headers: {
                 "Content-type": "application/json"
             },
             body: JSON.stringify({
-                text: updatedText
+                post: updatedText
             }),
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => setComments((comments) => comments?.map((comment) => comment.id === data.id ? data : comment)))
+
+        setUpdatePost(!updatePost)
+        setUpdatedText("")
     }
 
-    const handleDelete = () => {
-        fetch(`/worldpuzzleremove/${currentPost}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
-
+    const handleDeleteClick = () => {
+        handleDelete(postId)
     }
 
     return (
         <div>
             <button onClick={handleClick}>Update</button>
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDeleteClick}>Delete</button>
             {updatePost === true ?
                 <form onSubmit={handleSubmit}>
                     <input type="text" value={updatedText} onChange={handleChange} />

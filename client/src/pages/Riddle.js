@@ -6,8 +6,8 @@ import styled from 'styled-components'
 function Riddle({ user }) {
     const [comments, setComments] = useState([])
     const [newPost, setNewPost] = useState({})
-    const [riddle, setRiddle] = useState("")
     const [show, setShow] = useState(false)
+
 
 
 
@@ -15,25 +15,17 @@ function Riddle({ user }) {
         fetch("/wordpuzzle")
             .then(r => r.json())
             .then(data => {
-                console.log(data)
-                // setComments(data)
+                setComments(data)
             })
     }, [])
 
-    
 
 
-    const handleHandler = (e) => {
-        e.preventDefault()
-        setNewPost({
-            user_id: user.id,
-            post: riddle
-        })
-        handleSubmit()
-    }
 
-    console.log(newPost)
-    const handleSubmit = () => {
+
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
         fetch("/rpost", {
             method: 'POST',
             headers: {
@@ -42,24 +34,38 @@ function Riddle({ user }) {
             body: JSON.stringify(newPost),
         })
             .then(res => res.json())
-        setComments([newPost, ...comments])
+            .then(data => setComments([data, ...comments]))
+        event.target.reset()
     }
 
 
     const handleChange = (e) => {
-        setRiddle(e.target.value)
+        setNewPost({
+            user_id: user.id,
+            post: e.target.value
+        })
     }
-    console.log(riddle)
+
+    const handleDelete = (postId) => {
+        fetch(`/worldpuzzleremove/${postId}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+        setComments(comments?.filter(comment => comment.id !== postId))
+    }
+
     const changeShow = () => setShow(!show)
+
+
     return (
         <div>
             <PageTitle>Riddles!</PageTitle>
             <ShowButton onClick={changeShow}>Have a Riddle?</ShowButton>
             {show === true ?
-                <RiddlePostForm handleHandler={handleHandler} handleChange={handleChange} riddle={riddle} />
+                <RiddlePostForm handleSubmit={handleSubmit} handleChange={handleChange} />
                 : <p></p>
             }
-            {comments?.map(comment => { return <PostDisplays key={comment.id} text={comment.post} id={comment.user_id} user={user} postId={comment.id} /> })}
+            {comments?.map(comment => { return <PostDisplays key={comment.id} text={comment.post} id={comment.user} user={user} postId={comment.id} handleDelete={handleDelete} setComments={setComments} /> })}
 
         </div>
     )

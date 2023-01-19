@@ -1,2 +1,3 @@
 class ThreedpuzzlesController < ApplicationController
+    
 end

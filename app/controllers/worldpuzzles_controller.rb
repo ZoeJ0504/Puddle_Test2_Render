@@ -1,7 +1,8 @@
 class WorldpuzzlesController < ApplicationController
 
     def index
-        render json: Worldpuzzle.all
+        w = Worldpuzzle.all
+        render json: w
     end
 
     def create  

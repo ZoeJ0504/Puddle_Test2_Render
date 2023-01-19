@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 
-function RiddlePostForm({ riddle, handleHandler, handleChange }) {
+function RiddlePostForm({ riddle, handleSubmit, handleChange }) {
 
 
 
@@ -11,8 +11,8 @@ function RiddlePostForm({ riddle, handleHandler, handleChange }) {
 
     return (
         <PostFormDiv>
-            <form onSubmit={handleHandler}>
-                <Post type="text" onChange={handleChange} value={riddle} />
+            <form onSubmit={handleSubmit}>
+                <Post type="text" onChange={handleChange} />
                 <p></p>
                 <PostButton type="submit">Post</PostButton>
             </form>
