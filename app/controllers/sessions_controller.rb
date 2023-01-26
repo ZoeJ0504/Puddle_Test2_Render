@@ -14,4 +14,5 @@ class SessionsController < ApplicationController
         session.delete :user_id
         head :no_content
     end
+    
 end

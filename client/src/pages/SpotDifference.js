@@ -48,7 +48,7 @@ function SpotDifference({ user }) {
     return (
         <div>
             <SDForm user={user} handleHandler={handleHandler} handleChange={handleChange} updatedText={updatedText} />
-            {posts.map(post => { return <SDDisplay key={post.id} text={post.text} id={post.user_id} user={user} postId={post.id} /> })}
+            {posts?.map(post => { return <SDDisplay key={post.id} text={post.text} id={post.user_id} user={user} postId={post.id} /> })}
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SignedInPrivilege({ handleDelete, postId, setComments }) {
+function SignedInPrivilege({ handleDelete, postId, setRiddles }) {
     const [updatePost, setUpdatePost] = useState(false)
     const [updatedText, setUpdatedText] = useState("")
 
@@ -28,7 +28,7 @@ function SignedInPrivilege({ handleDelete, postId, setComments }) {
             }),
         })
             .then(res => res.json())
-            .then(data => setComments((comments) => comments?.map((comment) => comment.id === data.id ? data : comment)))
+            .then(data => setRiddles((riddles) => riddles?.map((riddle) => riddle.id === data.id ? data : riddle)))
 
         setUpdatePost(!updatePost)
         setUpdatedText("")

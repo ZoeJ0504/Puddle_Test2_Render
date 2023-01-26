@@ -1,2 +1,3 @@
 class Threedpuzzle < ApplicationRecord
+
 end

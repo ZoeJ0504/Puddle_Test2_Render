@@ -22,5 +22,14 @@ Rails.application.routes.draw do
   post "/rpost", to: "worldpuzzles#create"
   delete "/worldpuzzleremove/:id", to: "worldpuzzles#destroy"
   patch "/worldpuzzleupdate/:id", to: "worldpuzzles#update" 
+
+  get "/comment", to: "comments#index"
+  post "/cpost", to: "comments#create"
+  delete "/commentremove/:id", to: "comments#destroy"
+  patch "/comment/:id", to: "comments#update"
+
+  get"/postcomment/:puzzle_id", to: "comments#post_comment"
+
+
   
 end

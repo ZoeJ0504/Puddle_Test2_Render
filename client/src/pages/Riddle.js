@@ -4,7 +4,7 @@ import RiddlePostForm from '../components/RiddlePostForm'
 import styled from 'styled-components'
 
 function Riddle({ user }) {
-    const [comments, setComments] = useState([])
+    const [riddles, setRiddles] = useState([])
     const [newPost, setNewPost] = useState({})
     const [show, setShow] = useState(false)
 
@@ -15,7 +15,7 @@ function Riddle({ user }) {
         fetch("/wordpuzzle")
             .then(r => r.json())
             .then(data => {
-                setComments(data)
+                setRiddles(data)
             })
     }, [])
 
@@ -34,24 +34,24 @@ function Riddle({ user }) {
             body: JSON.stringify(newPost),
         })
             .then(res => res.json())
-            .then(data => setComments([data, ...comments]))
+            .then(data => setRiddles([data, ...riddles]))
         event.target.reset()
     }
 
-
+    console.log(riddles)
     const handleChange = (e) => {
         setNewPost({
             user_id: user.id,
             post: e.target.value
         })
     }
-
+  
     const handleDelete = (postId) => {
         fetch(`/worldpuzzleremove/${postId}`, {
             method: "DELETE"
         })
             .then(res => res.json())
-        setComments(comments?.filter(comment => comment.id !== postId))
+        setRiddles(riddles?.filter(comment => comment.id !== postId))
     }
 
     const changeShow = () => setShow(!show)
@@ -65,7 +65,7 @@ function Riddle({ user }) {
                 <RiddlePostForm handleSubmit={handleSubmit} handleChange={handleChange} />
                 : <p></p>
             }
-            {comments?.map(comment => { return <PostDisplays key={comment.id} text={comment.post} id={comment.user} user={user} postId={comment.id} handleDelete={handleDelete} setComments={setComments} /> })}
+            {riddles?.map(riddle => { return <PostDisplays key={riddle.id} text={riddle.post} id={riddle.user} user={user} postId={riddle.id} postComment={riddle.comment} handleDelete={handleDelete} setRiddles={setRiddles} /> })}
 
         </div>
     )

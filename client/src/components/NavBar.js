@@ -1,7 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import logo from "../image/logo.png"
+import logo from "../image/Puddle.png"
 
 function NavBar({ logout }) {
     const navigate = useNavigate()
