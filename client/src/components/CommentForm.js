@@ -1,27 +1,10 @@
 import React, { useState } from "react"
 
-function CommentForm({ postComment, userId, postId }) {
+function CommentForm({ handleCommentSubmit }) {
     const [newComment, setNewComment] = useState("")
 
-    console.log(postId)
     const handleSubmit = (event) => {
-        event.preventDefault()
-        fetch("/cpost", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                    message: newComment,
-                    user_id: userId,
-                    puzzle_id: postId
-                }
-            ),
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-        event.target.reset()
+        handleCommentSubmit(event, { newComment })
     }
 
     const handleChange = (event) => {

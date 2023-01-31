@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     def update
         c = Comment.find(params[:id])
         c.update(:message => params[:message])
-        render json: p
+        render json: c
     end 
 
     def destroy 

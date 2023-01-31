@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
-function SignedInPrivilege({ handleDelete, postId, setRiddles }) {
+function SignedInPrivilege({ handleDelete, handleSubmit, postId }) {
     const [updatePost, setUpdatePost] = useState(false)
     const [updatedText, setUpdatedText] = useState("")
 
-
+    const handleFormSubmit = (event) => {
+        handleSubmit(event, {postId, setUpdatedText, updatedText})
+        setUpdatePost(!updatePost)
+    }
 
     const handleClick = () => {
         setUpdatePost(!updatePost)
@@ -12,26 +15,6 @@ function SignedInPrivilege({ handleDelete, postId, setRiddles }) {
 
     const handleChange = (event) => {
         setUpdatedText(event.target.value)
-    }
-
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-
-        fetch(`/worldpuzzleupdate/${postId}`, {
-            method: "PATCH",
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-                post: updatedText
-            }),
-        })
-            .then(res => res.json())
-            .then(data => setRiddles((riddles) => riddles?.map((riddle) => riddle.id === data.id ? data : riddle)))
-
-        setUpdatePost(!updatePost)
-        setUpdatedText("")
     }
 
     const handleDeleteClick = () => {
@@ -43,7 +26,7 @@ function SignedInPrivilege({ handleDelete, postId, setRiddles }) {
             <button onClick={handleClick}>Update</button>
             <button onClick={handleDeleteClick}>Delete</button>
             {updatePost === true ?
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleFormSubmit}>
                     <input type="text" value={updatedText} onChange={handleChange} />
                     <button>Update!</button>
                 </form> : ""}

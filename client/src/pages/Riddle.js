@@ -19,11 +19,6 @@ function Riddle({ user }) {
             })
     }, [])
 
-
-
-
-
-
     const handleSubmit = (event) => {
         event.preventDefault()
         fetch("/rpost", {
@@ -36,26 +31,43 @@ function Riddle({ user }) {
             .then(res => res.json())
             .then(data => setRiddles([data, ...riddles]))
         event.target.reset()
+        setShow(!show)
     }
 
-    console.log(riddles)
     const handleChange = (e) => {
         setNewPost({
             user_id: user.id,
             post: e.target.value
         })
     }
-  
+
     const handleDelete = (postId) => {
         fetch(`/worldpuzzleremove/${postId}`, {
             method: "DELETE"
         })
             .then(res => res.json())
-        setRiddles(riddles?.filter(comment => comment.id !== postId))
+        setRiddles(riddles?.filter(riddle => riddle.id !== postId))
     }
 
     const changeShow = () => setShow(!show)
 
+    const handlePostSubmit = (event, { postId, updatedText, setUpdatedText }) => {
+        event.preventDefault()
+
+        fetch(`/worldpuzzleupdate/${postId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                post: updatedText
+            }),
+        })
+            .then(res => res.json())
+            .then(data => setRiddles((riddles) => riddles?.map((riddle) => riddle.id === data.id ? data : riddle)))
+
+        setUpdatedText("")
+    }
 
     return (
         <div>
@@ -65,7 +77,7 @@ function Riddle({ user }) {
                 <RiddlePostForm handleSubmit={handleSubmit} handleChange={handleChange} />
                 : <p></p>
             }
-            {riddles?.map(riddle => { return <PostDisplays key={riddle.id} text={riddle.post} id={riddle.user} user={user} postId={riddle.id} postComment={riddle.comment} handleDelete={handleDelete} setRiddles={setRiddles} /> })}
+            {riddles?.map(riddle => { return <PostDisplays key={riddle.id} text={riddle.post} id={riddle.user} user={user} postId={riddle.id} postComment={riddle.comment} handleDelete={handleDelete} setRiddles={setRiddles} handleSubmit={handlePostSubmit} /> })}
 
         </div>
     )

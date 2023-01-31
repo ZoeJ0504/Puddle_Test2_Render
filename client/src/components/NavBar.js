@@ -31,7 +31,7 @@ function NavBar({ logout }) {
     }
 
     const handle3DPuzzle = () => {
-        navigate("/3d_puzzle")
+        navigate("/optical_illusion")
     }
 
     return (
@@ -42,7 +42,7 @@ function NavBar({ logout }) {
             <NavTab onClick={handleHomeClick}>Home</NavTab>
             <NavTab onClick={handleRiddleClick}>Riddles</NavTab>
             <NavTab onClick={handleSDClick}>Spot The Difference</NavTab>
-            <NavTab onClick={handle3DPuzzle}>3D Puzzle</NavTab>
+            <NavTab onClick={handle3DPuzzle}>Optical Illusion</NavTab>
             <NavButton onClick={handleClick}>Logout</NavButton>
         </NavBarDiv>
     )

@@ -17,8 +17,8 @@ class ThreedpuzzlesController < ApplicationController
 
     def destroy 
         t = Threedpuzzle.find(params[:id])
-        three = t.destroy
-        render json: three
+        threed = t.destroy
+        render json: threed
     end 
 
 

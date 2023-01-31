@@ -1,14 +1,16 @@
 import React from "react"
-import SignedInPrivilege from "./SignedInPrivilege"
+import CommentSignedInPrivilege from "./CommentSignedInPrivilege"
 
-function CommentDisplay({ comment, }) {
+function CommentDisplay({ comment, commentId, postUser, loggedInUser, handleCommentDelete, handleCommentUpdate }) {
+
 
 
     return (
 
         <div>
             <p>{comment}</p>
-            <SignedInPrivilege />
+            <p>{postUser}</p>
+            {loggedInUser?.username === postUser ? <CommentSignedInPrivilege handleDelete={handleCommentDelete} commentId={commentId} handleCommentUpdate={handleCommentUpdate} /> : <p></p>}
         </div>
     )
 }

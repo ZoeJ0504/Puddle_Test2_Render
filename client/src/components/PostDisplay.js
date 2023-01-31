@@ -3,7 +3,7 @@ import SignedInPrivilege from "./SignedInPrivilege";
 import CommentForm from "./CommentForm";
 import CommentDisplay from "./CommentDisplay";
 
-function PostDisplays({ text, id, user, postId, handleDelete, setRiddles, postComment }) {
+function PostDisplays({ text, id, user, postId, handleDelete, setRiddles, postComment, handleSubmit }) {
     const [postUsername, setPostUsername] = useState("")
     const [showComment, setShowComment] = useState(false)
     const [postComments, setPostComments] = useState([])
@@ -17,15 +17,63 @@ function PostDisplays({ text, id, user, postId, handleDelete, setRiddles, postCo
             .then(res => res.json())
             .then(data => setPostComments(data))
     }, [postId])
-    console.log(postComments)
+
+
+    const handleCommentDelete = (commentId) => {
+        fetch(`/commentremove/${commentId}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+        setPostComments(postComments.filter(comment => comment.id !== commentId))
+    }
+
+    const handleCommentSubmit = (event, { newComment }) => {
+        event.preventDefault()
+        fetch("/cpost", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    message: newComment,
+                    user_id: user.id,
+                    puzzle_id: postId
+                }
+            ),
+        })
+            .then(res => res.json())
+            .then(data => setPostComments([data, ...postComments]))
+        event.target.reset()
+        setShowComment(!showComment)
+    }
+
+    const handleCommentUpdate = (event, { commentId, setUpdatedComment, updatedComment }) => {
+        event.preventDefault()
+
+        fetch(`/commentupdate/${commentId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                message: updatedComment
+            }),
+        })
+            .then(res => res.json())
+            .then(data => setPostComments((comment) => comment?.map((comment) => comment.id === data.id ? data : comment)))
+
+        setUpdatedComment("")
+    }
+
     return (
         <div>
             <p>{text}</p>
             <p>-{postUsername}</p>
-            {user && (user?.username === postUsername ? <SignedInPrivilege setRiddles={setRiddles} handleDelete={handleDelete} postId={postId} /> : <p>Enjoy the Post!</p>)}
+            {user && (user?.username === postUsername ? <SignedInPrivilege setRiddles={setRiddles} handleDelete={handleDelete} postId={postId} handleSubmit={handleSubmit} /> : <p>Enjoy the Post!</p>)}
             <button onClick={handleClick}>Comment</button>
-            {(showComment === true ? <CommentForm postComment={postComment} userId={user.id} postId={postId} /> : <p></p>)}
-            {postComments.map(postComment => <CommentDisplay key={postComment.id} comment={postComment.message} />)}
+            {(showComment === true ? <CommentForm postComment={postComment} handleCommentSubmit={handleCommentSubmit} /> : <p></p>)}
+            {postComments.map(postComment => <CommentDisplay key={postComment.id} comment={postComment.message} commentId={postComment.id} postUser={postComment.user.username} loggedInUser={user} handleCommentDelete={handleCommentDelete} handleCommentUpdate={handleCommentUpdate} />)}
         </div>
     )
 }

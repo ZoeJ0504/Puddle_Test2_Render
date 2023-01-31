@@ -31,7 +31,7 @@ function App() {
         <Route path="/home" element={<Home2 />} />
         <Route path="/riddles" element={<Riddle user={user} />} />
         <Route path="/spot_the_difference" element={<SpotDifference user={user} />} />
-        <Route path="/3d_puzzle" element={<ThreeDPuzzles user={user} />} />
+        <Route path="/optical_illusion" element={<ThreeDPuzzles user={user} />} />
       </Routes>
     </div>
   );

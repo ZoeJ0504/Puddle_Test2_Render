@@ -26,10 +26,18 @@ Rails.application.routes.draw do
   get "/comment", to: "comments#index"
   post "/cpost", to: "comments#create"
   delete "/commentremove/:id", to: "comments#destroy"
-  patch "/comment/:id", to: "comments#update"
+  patch "/commentupdate/:id", to: "comments#update"
 
   get"/postcomment/:puzzle_id", to: "comments#post_comment"
 
+  get "/threedpuzzles", to: "threedpuzzles#index"
+  post "/tpost", to: "threedpuzzles#create"
+  delete "/threedpuzzleremove/:id", to: "threedpuzzles#destroy"
+  patch "/threedpuzzleupdate/:id", to: "threedpuzzles#update"
 
-  
+  get "/sds", to: "sds#index"
+  post "/spost", to: "sds#create"
+  delete "/sdremove/:id", to: "sds#destroy"
+  patch "/sdupdate/:id", to: "sds#update"
+
 end
