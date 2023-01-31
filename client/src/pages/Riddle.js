@@ -77,7 +77,7 @@ function Riddle({ user }) {
                 <RiddlePostForm handleSubmit={handleSubmit} handleChange={handleChange} />
                 : <p></p>
             }
-            {riddles?.map(riddle => { return <PostDisplays key={riddle.id} text={riddle.post} id={riddle.user} user={user} postId={riddle.id} postComment={riddle.comment} handleDelete={handleDelete} setRiddles={setRiddles} handleSubmit={handlePostSubmit} /> })}
+            {riddles?.map(riddle => { return <PostDisplays key={riddle.id} text={riddle.post} id={riddle.user} user={user} postId={riddle.id} postComment={riddle.comment} handleDelete={handleDelete} setRiddles={setRiddles} handleSubmit={handlePostSubmit} comments={riddle.comments} /> })}
 
         </div>
     )

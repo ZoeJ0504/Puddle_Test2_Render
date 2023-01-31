@@ -3,7 +3,7 @@ import SignedInPrivilege from "./SignedInPrivilege";
 import CommentForm from "./CommentForm";
 import CommentDisplay from "./CommentDisplay";
 
-function PostDisplays({ text, id, user, postId, handleDelete, setRiddles, postComment, handleSubmit }) {
+function PostDisplays({ text, id, user, postId, handleDelete, setRiddles, postComment, handleSubmit, comments }) {
     const [postUsername, setPostUsername] = useState("")
     const [showComment, setShowComment] = useState(false)
     const [postComments, setPostComments] = useState([])
@@ -13,12 +13,12 @@ function PostDisplays({ text, id, user, postId, handleDelete, setRiddles, postCo
     const handleClick = () => { setShowComment(!showComment) }
 
     useEffect(() => {
-        fetch(`/postcomment/${postId}`)
+        fetch(`/postcommentriddle/${postId}`)
             .then(res => res.json())
             .then(data => setPostComments(data))
     }, [postId])
 
-
+    console.log(comments)
     const handleCommentDelete = (commentId) => {
         fetch(`/commentremove/${commentId}`, {
             method: "DELETE"
@@ -38,7 +38,9 @@ function PostDisplays({ text, id, user, postId, handleDelete, setRiddles, postCo
                 {
                     message: newComment,
                     user_id: user.id,
-                    puzzle_id: postId
+                    worldpuzzle_id: postId,
+                    sd_puzzle_id: 0,
+                    threedpuzzle_id: 0
                 }
             ),
         })

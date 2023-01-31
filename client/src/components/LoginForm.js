@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom"
-import logo from "../image/logo.png"
+import logo from "../image/Puddle.png"
 
 function LoginForm({ setUser, setIsVisible }) {
   const [username, setUsername] = useState("");

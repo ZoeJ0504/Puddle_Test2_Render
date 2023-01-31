@@ -7,8 +7,9 @@ function Home2() {
     return (
 <div>
 <HeadingTitle>Welcome to Puddle!</HeadingTitle>
+<p>Priddle 2.0!</p>
 <p>Social site to share puzzles and riddles!</p>
-<p>There are three different categories you can post in: Riddles, Spot the Difference, 3D Puzzles.</p>
+<div>There are three different categories you can post in: Riddles, Spot the Difference, Optical Illusions. I added a new feature so you can comment! Have fun and be friendly!</div>
 <p></p>
 </div>
     )

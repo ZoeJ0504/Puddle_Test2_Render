@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import logo from "../image/logo.png"
+import logo from "../image/Puddle.png"
 
 function SignUp({ setUser, setIsVisible }) {
   const [username, setUsername] = useState("");

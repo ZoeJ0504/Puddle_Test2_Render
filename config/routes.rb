@@ -28,7 +28,9 @@ Rails.application.routes.draw do
   delete "/commentremove/:id", to: "comments#destroy"
   patch "/commentupdate/:id", to: "comments#update"
 
-  get"/postcomment/:puzzle_id", to: "comments#post_comment"
+  get "/postcommentriddle/:worldpuzzle_id", to: "comments#post_riddle"
+  get "/postcommentthreed/:threedpuzzle_id", to: "comments#post_threedpuzzle"
+  get "/postcommentsd/:sd_id", to: "comments#post_sd"
 
   get "/threedpuzzles", to: "threedpuzzles#index"
   post "/tpost", to: "threedpuzzles#create"

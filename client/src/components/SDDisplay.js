@@ -12,7 +12,7 @@ function SDDisplay({ imgUrl, postUser, currentUser, postId, handleDelete, handle
     const handleClick = () => { setShowComment(!showComment) }
 
     useEffect(() => {
-        fetch(`/postcomment/${postId}`)
+        fetch(`/postcommentsd/${postId}`)
             .then(res => res.json())
             .then(data => setPostComments(data))
     }, [postId])
@@ -37,7 +37,9 @@ function SDDisplay({ imgUrl, postUser, currentUser, postId, handleDelete, handle
                 {
                     message: newComment,
                     user_id: currentUser.id,
-                    puzzle_id: postId
+                    sd_puzzle_id: postId,
+                    worldpuzzle_id: 0,
+                    threedpuzzle_id: 0
                 }
             ),
         })
@@ -75,7 +77,7 @@ function SDDisplay({ imgUrl, postUser, currentUser, postId, handleDelete, handle
             {currentUser && (currentUser?.username === postUser.username ? <SignedInPrivilege postId={postId} handleDelete={handleDelete} handleSubmit={handleSubmit} /> : <p>Enjoy the Post!</p>)}
             <button onClick={handleClick}>Comment</button>
             {(showComment === true ? <CommentForm postComment={postComments} handleCommentSubmit={handleCommentSubmit} /> : <p></p>)}
-            {postComments.map(postComment => <CommentDisplay key={postComment.id} comment={postComment.message} commentId={postComment.id} postUser={postComment.user.username} loggedInUser={currentUser} handleCommentDelete={handleCommentDelete} handleCommentUpdate={handleCommentUpdate} />)}
+            {postComments?.map(postComment => <CommentDisplay key={postComment.id} comment={postComment.message} commentId={postComment.id} postUser={postComment.user.username} loggedInUser={currentUser} handleCommentDelete={handleCommentDelete} handleCommentUpdate={handleCommentUpdate} />)}
         </div>
     )
 }

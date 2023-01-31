@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     end 
 
     def create  
-    c = Comment.create(comment_params)
+    c = Comment.create!(comment_params)
     render json: c ,status: :created
     end
 
@@ -21,8 +21,18 @@ class CommentsController < ApplicationController
         render json: comment
     end 
 
-    def post_comment
-        pc = Comment.where("puzzle_id = ?", params[:puzzle_id])
+    def post_threedpuzzle
+        pc = Comment.where("threedpuzzle_id = ?", params[:threedpuzzle_id])
+        render json: pc
+    end
+
+    def post_sd
+        pc = Comment.where("sd_id = ?", params[:sd_id])
+        render json: pc
+    end
+
+    def post_riddle
+        pc = Comment.where("worldpuzzle_id = ?", params[:worldpuzzle_id])
         render json: pc
     end
 
@@ -30,9 +40,8 @@ class CommentsController < ApplicationController
 
 
 
-
 def comment_params
-    params.permit(:message, :user_id, :puzzle_id)
+    params.permit(:message, :user_id, :worldpuzzle_id, :threedpuzzle_id, :sd_id)
 end 
 
 end
